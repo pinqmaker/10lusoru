@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Eş Sesli Kelimeler | YEGITEK26TURK5010144</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Signika:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --blue:#378ADD;--blue-light:#E6F1FB;--blue-dark:#0C447C;
+  --teal:#1D9E75;--teal-light:#E1F5EE;--teal-dark:#085041;
+  --red:#E24B4A;--red-light:#FCEBEB;--red-dark:#791F1F;
+  --amber:#BA7517;--amber-light:#FFF3DC;
+  --gray-bg:#F4F3EF;--border:rgba(0,0,0,0.1);
+  --text:#1a1a1a;--text-muted:#666;
+  --r:12px;--r-sm:8px;
+  --fs-xl:clamp(18px,3.5vmin,26px);
+  --fs-lg:clamp(15px,2.8vmin,21px);
+  --fs-md:clamp(13px,2.3vmin,17px);
+  --fs-sm:clamp(11px,1.9vmin,14px);
+}
+
+html,body{
+  width:100%;height:100%;
+  font-family:'Signika',-apple-system,'Segoe UI',sans-serif;
+  background:var(--gray-bg);
+  color:var(--text);
+  overflow:hidden;
+}
+
+body{
+  display:flex;align-items:center;justify-content:center;
+}
+
+.screen{display:none;width:100%;height:100%;padding:clamp(12px,2.5vmin,24px);align-items:center;justify-content:center;flex-direction:column;}
+.screen.active{display:flex;}
+
+/* ── CARD ── */
+.card{
+  background:#fff;
+  border-radius:var(--r);
+  border:1px solid var(--border);
+  padding:clamp(20px,4vmin,40px) clamp(20px,4vmin,44px);
+  width:100%;
+  max-width:min(580px, 92vw);
+  box-shadow:0 2px 16px rgba(0,0,0,0.06);
+}
+
+/* ── START ── */
+.badge{
+  display:inline-block;
+  background:var(--blue-light);color:var(--blue-dark);
+  font-size:var(--fs-sm);font-weight:600;
+  padding:4px 12px;border-radius:99px;
+  margin-bottom:clamp(12px,2vmin,20px);
+  letter-spacing:0.4px;
+}
+.start-card{text-align:center;}
+.start-card h1{font-size:var(--fs-xl);font-weight:700;margin-bottom:6px;}
+.start-card .sub{font-size:var(--fs-sm);color:var(--text-muted);margin-bottom:clamp(12px,2vmin,20px);}
+.objective-box{
+  background:var(--blue-light);border-radius:var(--r-sm);
+  padding:clamp(10px,2vmin,16px) clamp(12px,2.5vmin,20px);
+  margin-bottom:clamp(16px,3vmin,28px);
+  font-size:var(--fs-sm);color:var(--blue-dark);
+  line-height:1.7;text-align:left;
+}
+.objective-box strong{display:block;margin-bottom:4px;}
+
+/* ── BUTTONS ── */
+.btn{
+  font-family:'Signika',sans-serif;font-weight:600;
+  border:none;border-radius:var(--r-sm);
+  cursor:pointer;transition:opacity .15s,transform .1s;
+  font-size:var(--fs-md);
+  padding:clamp(11px,2vmin,16px) clamp(24px,4vmin,40px);
+  line-height:1;
+}
+.btn:active{transform:scale(0.97);}
+.btn-primary{background:var(--blue);color:#fff;}
+.btn-primary:hover{opacity:.9;}
+.btn-outline{background:#fff;color:var(--text);border:1.5px solid var(--border);}
+.btn-outline:hover{background:var(--gray-bg);}
+.btn-full{width:100%;display:block;}
+
+/* ── GAME ── */
+.game-header{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:clamp(8px,1.5vmin,14px);
+  width:100%;max-width:min(580px,92vw);
+}
+.game-header span{font-size:var(--fs-sm);color:var(--text-muted);font-weight:500;}
+.score-pill{
+  background:var(--blue-light);color:var(--blue-dark);
+  font-size:var(--fs-sm);font-weight:700;
+  padding:4px 12px;border-radius:99px;
+}
+.prog-bg{background:#E5E4E0;border-radius:99px;height:5px;overflow:hidden;width:100%;max-width:min(580px,92vw);margin-bottom:clamp(8px,1.5vmin,14px);}
+.prog-fill{height:100%;background:var(--blue);border-radius:99px;transition:width .4s ease;}
+
+.q-label{font-size:var(--fs-sm);font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.8px;margin-bottom:clamp(8px,1.5vmin,14px);}
+.sentence{font-size:var(--fs-lg);font-weight:500;line-height:1.75;color:var(--text);margin-bottom:clamp(14px,2.5vmin,24px);}
+.sentence mark{background:var(--amber-light);color:var(--amber);padding:2px 7px;border-radius:5px;font-weight:700;font-style:normal;}
+
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:clamp(8px,1.5vmin,12px);margin-bottom:clamp(10px,2vmin,16px);}
+@media(max-width:340px){.opts{grid-template-columns:1fr;}}
+
+.opt{
+  background:#fff;border:1.5px solid var(--border);border-radius:var(--r-sm);
+  padding:clamp(11px,2vmin,16px) clamp(11px,2vmin,15px);
+  font-family:'Signika',sans-serif;font-size:var(--fs-md);font-weight:500;
+  color:var(--text);cursor:pointer;text-align:left;
+  transition:border-color .15s,background .15s;
+  line-height:1.5;min-height:clamp(48px,8vmin,64px);
+}
+.opt:hover:not(:disabled){border-color:var(--blue);background:var(--blue-light);}
+.opt.correct{background:var(--teal-light);border-color:var(--teal);color:var(--teal-dark);}
+.opt.wrong{background:var(--red-light);border-color:var(--red);color:var(--red-dark);}
+.opt:disabled{cursor:default;}
+
+.fb{
+  border-radius:var(--r-sm);
+  padding:clamp(10px,2vmin,14px) clamp(12px,2.5vmin,18px);
+  font-size:var(--fs-sm);line-height:1.7;
+  margin-bottom:clamp(10px,2vmin,14px);
+  display:none;
+}
+.fb.ok{background:var(--teal-light);color:var(--teal-dark);border:1px solid #9FE1CB;}
+.fb.ko{background:var(--red-light);color:var(--red-dark);border:1px solid #F7C1C1;}
+
+/* ── END ── */
+.end-card{text-align:center;}
+.score-ring{
+  width:clamp(80px,15vmin,112px);height:clamp(80px,15vmin,112px);
+  border-radius:50%;
+  border:3px solid var(--blue);background:var(--blue-light);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  margin:0 auto clamp(16px,3vmin,24px);
+}
+.score-ring .big{font-size:clamp(24px,5vmin,36px);font-weight:700;color:var(--blue-dark);line-height:1;}
+.score-ring .small{font-size:var(--fs-sm);color:var(--blue);font-weight:500;}
+.end-card h2{font-size:var(--fs-xl);font-weight:700;margin-bottom:8px;}
+.end-card p{font-size:var(--fs-sm);color:var(--text-muted);margin-bottom:clamp(20px,4vmin,32px);line-height:1.7;}
+.end-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+</style>
+</head>
+<body>
+
+<!-- BAŞLANGIÇ -->
+<div id="s-start" class="screen active">
+  <div class="card start-card">
+    <div class="badge">YEGITEK26TURK5010144</div>
+    <h1>Eş Sesli Kelimeler</h1>
+    <p class="sub">Aynı yazılış, farklı anlam!</p>
+    <div class="objective-box">
+      <strong>Kazanım: T.5.3.9</strong>
+      Eş sesli kelimelerin cümledeki anlamını doğru biçimde ayırt eder.
+    </div>
+    <button class="btn btn-primary" onclick="startGame()">Oyuna Başla →</button>
+  </div>
+</div>
+
+<!-- OYUN -->
+<div id="s-game" class="screen">
+  <div class="game-header">
+    <span id="qCounter">Soru 1 / 10</span>
+    <span class="score-pill" id="scoreDisp">Puan: 0</span>
+  </div>
+  <div class="prog-bg"><div class="prog-fill" id="progFill" style="width:0%"></div></div>
+  <div class="card">
+    <div class="q-label">Bu cümlede hangi anlamda kullanılmış?</div>
+    <div class="sentence" id="sentText"></div>
+    <div class="opts" id="optsGrid"></div>
+    <div class="fb" id="fbBox"></div>
+    <button class="btn btn-primary btn-full" id="nextBtn" style="display:none" onclick="next()">Sonraki →</button>
+  </div>
+</div>
+
+<!-- BİTİŞ -->
+<div id="s-end" class="screen">
+  <div class="card end-card">
+    <div class="score-ring">
+      <span class="big" id="finalScore">0</span>
+      <span class="small">/ 10</span>
+    </div>
+    <h2 id="endTitle"></h2>
+    <p id="endMsg"></p>
+    <div class="end-btns">
+      <button class="btn btn-outline" onclick="startGame()">Tekrar Oyna</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const Q=[
+  {s:"Dağların tepesi <mark>kar</mark>la kaplıydı.",o:["Kazanç, kâr","Kışın yağan beyaz yağış","Bembeyaz renk","Ormanlık alan"],c:1,x:"'Kar' burada kışın yağan beyaz yağışı ifade eder. 'Kâr' (kazanç) ile yazılışı aynı ama anlamı farklıdır."},
+  {s:"Bu işten hiç <mark>kar</mark> edemedik.",o:["Yağan beyaz yağış","Üzüntü, dert","Kazanç, kâr","Ormana gitmek"],c:2,x:"'Kar' burada kazanç, kâr anlamındadır. Yazılışı aynı olsa da kış yağışından farklı bir sözcüktür."},
+  {s:"Bahçede kırmızı <mark>gül</mark>ler açmıştı.",o:["Sevinmek, gülmek","Dikenli bir çiçek türü","Ağaç türü","Renk adı"],c:1,x:"'Gül' burada bahçede yetişen, dikenli güzel bir çiçeği ifade eder."},
+  {s:"O kadar komikti ki herkes <mark>gül</mark>dü.",o:["Bir çiçek türü","Ağlamak","Neşeyle ses çıkarmak","Şarkı söylemek"],c:2,x:"'Güldü' burada neşe veya sevinçle ses çıkarmak anlamında kullanılmıştır."},
+  {s:"Elini <mark>yüz</mark>üne götürdü.",o:["Sayı (100)","Yüzmek","Çehre, surat","Bir yön"],c:2,x:"'Yüz' burada insanın başının ön bölümü, surat anlamında kullanılmıştır."},
+  {s:"Havuzda <mark>yüz</mark>meyi çok severim.",o:["Çehre, surat","Sayı (100)","Suda kulaç atarak ilerlemek","Koşmak"],c:2,x:"'Yüzmek' burada suda hareket ederek ilerlemek anlamındadır."},
+  {s:"Ahırda güzel bir <mark>at</mark> vardı.",o:["Fırlatmak","Tek tırnaklı binek hayvanı","Bir alet","Renk adı"],c:1,x:"'At' burada tek tırnaklı, evcil binek hayvanını ifade eder."},
+  {s:"Elindeki taşı suya <mark>at</mark>.",o:["Binek hayvanı","Tutmak","Fırlatmak, uzaklaştırmak","Almak"],c:2,x:"'At' burada fırlatmak, ileriye doğru göndermek anlamında kullanılmıştır."},
+  {s:"Köydeki küçük <mark>çay</mark>dan su içtiler.",o:["Sıcak içecek","Dere, küçük akarsu","Ağaç türü","Yol"],c:1,x:"'Çay' burada dere, küçük akarsu anlamında kullanılmıştır."},
+  {s:"Annem her sabah iki bardak <mark>çay</mark> içer.",o:["Küçük akarsu","Meyve","Demlenerek hazırlanan sıcak içecek","Yemek"],c:2,x:"'Çay' burada demlenerek hazırlanan sıcak bir içeceği ifade eder."}
+];
+
+let cur=0,score=0,done=false;
+
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');}
+
+function startGame(){cur=0;score=0;show('s-game');load();}
+
+function load(){
+  done=false;
+  const q=Q[cur];
+  document.getElementById('qCounter').textContent=`Soru ${cur+1} / ${Q.length}`;
+  document.getElementById('scoreDisp').textContent=`Puan: ${score}`;
+  document.getElementById('progFill').style.width=`${(cur/Q.length)*100}%`;
+  document.getElementById('sentText').innerHTML=q.s;
+  document.getElementById('fbBox').style.display='none';
+  document.getElementById('fbBox').className='fb';
+  document.getElementById('nextBtn').style.display='none';
+  const grid=document.getElementById('optsGrid');
+  grid.innerHTML='';
+  q.o.forEach((opt,i)=>{
+    const b=document.createElement('button');
+    b.className='opt';b.textContent=opt;
+    b.onclick=()=>pick(i);
+    grid.appendChild(b);
+  });
+}
+
+function pick(i){
+  if(done)return;done=true;
+  const q=Q[cur];
+  const btns=document.querySelectorAll('.opt');
+  btns.forEach(b=>b.disabled=true);
+  btns[q.c].classList.add('correct');
+  const fb=document.getElementById('fbBox');
+  if(i===q.c){score++;btns[i].classList.add('correct');fb.className='fb ok';fb.innerHTML=`<strong>Doğru!</strong> ${q.x}`;}
+  else{btns[i].classList.add('wrong');fb.className='fb ko';fb.innerHTML=`<strong>Yanlış.</strong> ${q.x}`;}
+  fb.style.display='block';
+  document.getElementById('scoreDisp').textContent=`Puan: ${score}`;
+  const nb=document.getElementById('nextBtn');
+  nb.style.display='block';
+  nb.textContent=cur<Q.length-1?'Sonraki Soru →':'Sonucu Gör →';
+}
+
+function next(){
+  cur++;
+  if(cur>=Q.length){end();return;}
+  load();
+}
+
+function end(){
+  document.getElementById('progFill').style.width='100%';
+  document.getElementById('finalScore').textContent=score;
+  const r=score/Q.length;
+  let t,m;
+  if(r>=0.9){t='Mükemmel!';m='Eş sesli kelimelere tam hakimsin, tebrikler!';}
+  else if(r>=0.7){t='Çok İyi!';m='Birkaç soruyu kaçırdın ama genel olarak çok başarılısın.';}
+  else if(r>=0.5){t='İyi Çalışma!';m='Eş sesli kelimeleri biraz daha çalışırsan çok daha iyi olacaksın.';}
+  else{t='Tekrar Dene!';m='Eş sesli kelimeleri tekrar gözden geçirip bir daha dene!';}
+  document.getElementById('endTitle').textContent=t;
+  document.getElementById('endMsg').textContent=m;
+  show('s-end');
+
+  // Articulate Storyline'a veri gönder
+  try {
+    let player = window.parent.GetPlayer();
+    player.SetVar('oyun_puan', score);
+    player.SetVar('oyun_tamamlandi', true);
+    player.SetVar('oyun_basari', t);
+    player.SetVar('oyun_kaynak_id', '6Om12ljh5Cc');
+  } catch(e) {}
+}
+</script>
+</body>
+</html>
